@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		common.props = common.props
 		README.md = README.md
 		README_en.md = README_en.md
+		rougamo-di.png = rougamo-di.png
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.AspNetCore\Rougamo.Extensions.DependencyInjection.AspNetCore.csproj", "{3FE01878-0B9D-41D2-89AE-68A3599368D7}"

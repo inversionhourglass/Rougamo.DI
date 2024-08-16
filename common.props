@@ -5,13 +5,13 @@
     <RootNamespace />
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <!--<SignAssembly>true</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)key.snk</AssemblyOriginatorKeyFile>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <PackageReadmeFile>README_en.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/inversionhourglass/Rougamo.APM</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/inversionhourglass/Rougamo.APM.git</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/inversionhourglass/Rougamo.APM/master/rougamo-apm.png</PackageIconUrl>-->
+    <PackageProjectUrl>https://github.com/inversionhourglass/Rougamo.DI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/inversionhourglass/Rougamo.DI.git</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/inversionhourglass/Rougamo.DI/master/rougamo-apm.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
@@ -19,7 +19,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <!--<PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)CHANGELOG.md"))</PackageReleaseNotes>-->
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
   
   <ItemGroup>
