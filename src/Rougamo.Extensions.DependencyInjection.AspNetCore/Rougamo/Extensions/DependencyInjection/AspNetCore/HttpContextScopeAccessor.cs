@@ -9,7 +9,7 @@ namespace Rougamo.Extensions.DependencyInjection.AspNetCore
         public IServiceScope? Scope
         {
             get => httpContextAccessor.HttpContext == null ? null : new HttpContextScope(httpContextAccessor.HttpContext);
-            set => throw new InvalidOperationException("Cannot set the scope in asp.net core project.");
+            set => throw new InvalidOperationException("Cannot create a nested scope within an HttpContext scope.");
         }
     }
 }
