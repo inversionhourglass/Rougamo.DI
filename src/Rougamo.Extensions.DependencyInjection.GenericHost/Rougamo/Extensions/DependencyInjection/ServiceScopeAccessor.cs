@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace Rougamo.Extensions.DependencyInjection
@@ -31,23 +30,6 @@ namespace Rougamo.Extensions.DependencyInjection
                     }
                     scope.Push(value);
                 }
-            }
-        }
-
-        private sealed class ScopeChain : Stack<IServiceScope>
-        {
-            public bool TryPop()
-            {
-#if NETSTANDARD2_0
-                if (Count > 0)
-                {
-                    Pop();
-                    return true;
-                }
-                return false;
-#else
-                return TryPop(out _);
-#endif
             }
         }
     }
