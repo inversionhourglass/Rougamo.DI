@@ -24,9 +24,7 @@ namespace Rougamo.Context
             var provider = ServiceProviderHolder.Root;
             if (provider == null) return null;
 
-            var accessor = provider.GetService<IServiceScopeAccessor>();
-
-            return accessor?.Scope?.ServiceProvider ?? provider;
+            return provider.GetService<ISmartServiceProvider>() ?? provider;
         }
     }
 }

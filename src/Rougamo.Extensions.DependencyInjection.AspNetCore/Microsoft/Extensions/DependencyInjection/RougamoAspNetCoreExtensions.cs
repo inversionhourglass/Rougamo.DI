@@ -14,7 +14,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         public static IServiceCollection AddRougamoAspNetCore(this IServiceCollection services)
         {
-            services.AddHttpContextAccessor();
             services.AddHttpContextScopeAccessor();
             services.AddRougamoGenericHost();
 
@@ -26,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         public static IServiceCollection AddHttpContextScopeAccessor(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.TryAddSingleton<IServiceScopeAccessor, HttpContextScopeAccessor>();
 
             return services;
@@ -36,6 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         public static IServiceCollection AddNestableHttpContextScopeAccessor(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddSingleton<IServiceScopeAccessor, NestableHttpContextScopeAccessor>();
 
             return services;
