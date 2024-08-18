@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Rougamo.Extensions.DependencyInjection;
-using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -25,7 +24,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddServiceScopeAccessor(this IServiceCollection services)
         {
             services.TryAddSingleton<IServiceScopeAccessor, ServiceScopeAccessor>();
-            services.TryAddSingleton<ISmartServiceProvider, SmartServiceProvider>();
 
             return services;
         }
