@@ -41,7 +41,14 @@ jobs:
         run: dotnet pack ${{ env.SOLUTION }} --no-build --configuration Release
 
       - name: Publish
-        run: dotnet nuget push nugets/**.nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+        run: |
+          $tagName = "${{ github.ref_name }}"
+          if ($tagName -like "microsoft-*") {
+            $genericHost = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.GenericHost.*nupkg"
+            $aspnetcore = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.AspNetCore.*nupkg"
+            dotnet nuget push $genericHost.FullName -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+            dotnet nuget push $aspnetcore.FullName -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+          }
 
       - name: Create github release
         uses: ncipollo/release-action@v1
