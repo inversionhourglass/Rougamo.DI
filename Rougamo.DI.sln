@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{90A46C2A-2253-44D9-A8AE-94428744C324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.GenericHost", "src\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj", "{BA484F53-886B-4FA9-B74B-8AE25B5C6449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.GenericHost", "src\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj", "{BA484F53-886B-4FA9-B74B-8AE25B5C6449}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{E1FFFA22-F1C2-47C2-83B0-80244D6AFB08}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,19 +16,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		rougamo-di.png = rougamo-di.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.AspNetCore\Rougamo.Extensions.DependencyInjection.AspNetCore.csproj", "{3FE01878-0B9D-41D2-89AE-68A3599368D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.AspNetCore\Rougamo.Extensions.DependencyInjection.AspNetCore.csproj", "{3FE01878-0B9D-41D2-89AE-68A3599368D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B1F075EE-2CB7-4FA6-9BF1-0D106104C5ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.DITests", "test\Rougamo.DITests\Rougamo.DITests.csproj", "{D09EE633-784D-41A1-833F-03AD0DCE2E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.DITests", "test\Rougamo.DITests\Rougamo.DITests.csproj", "{D09EE633-784D-41A1-833F-03AD0DCE2E4C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssemblies", "TestAssemblies", "{6A069E23-FBE6-4390-9D7D-D9041D72541D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RougamoDefLib", "test\TestAssemblies\RougamoDefLib\RougamoDefLib.csproj", "{3D742E30-3D30-476B-A724-C6EA89C3CDA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericHost", "test\TestAssemblies\GenericHost\GenericHost.csproj", "{76CBFBFB-4CF6-4B08-AB68-2B628C6BD5F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHost", "test\TestAssemblies\GenericHost\GenericHost.csproj", "{76CBFBFB-4CF6-4B08-AB68-2B628C6BD5F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiHost", "test\TestAssemblies\WebApiHost\WebApiHost.csproj", "{1ED4A3EA-B7AA-4561-AFDC-1057D5534EA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "test\TestAssemblies\WebApiHost\WebApiHost.csproj", "{1ED4A3EA-B7AA-4561-AFDC-1057D5534EA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

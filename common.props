@@ -11,7 +11,7 @@
     <PackageReadmeFile>README_en.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/inversionhourglass/Rougamo.DI</PackageProjectUrl>
     <RepositoryUrl>https://github.com/inversionhourglass/Rougamo.DI.git</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/inversionhourglass/Rougamo.DI/master/rougamo-apm.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/inversionhourglass/Rougamo.DI/master/rougamo-di.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
