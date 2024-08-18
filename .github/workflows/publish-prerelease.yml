@@ -43,8 +43,8 @@ jobs:
         run: |
           $branchName = "${{ github.ref_name }}"
           if ($branchName -eq "pre/microsoft") {
-            dotnet nuget push nugets/Rougamo.Extensions.DependencyInjection.GenericHost.nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
-            dotnet nuget push nugets/Rougamo.Extensions.DependencyInjection.GenericHost.nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+            dotnet nuget push nugets/Rougamo.Extensions.DependencyInjection.GenericHost.*.nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+            dotnet nuget push nugets/Rougamo.Extensions.DependencyInjection.AspNetCore.*.nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
           } else {
             throw "Unknown branch [$branchName]."
           }
