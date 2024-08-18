@@ -8,11 +8,11 @@ namespace WebApiHost
         public static async Task Main(string[] args)
         {
             var serviceHolder = new ServiceHolder();
-            var main = new Main(serviceHolder);
+            var main = new Main();
 
-            var hostHolder = main.Execute(serviceHolder) as Main.HostHolder;
+            var hostHolder = main.Execute(serviceHolder);
 
-            await hostHolder!.WaitForShutdownAsync();
+            await hostHolder.WaitForShutdownAsync();
 
             await hostHolder.DisposeAsync();
         }

@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using RougamoDefLib;
 using RougamoDefLib.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace GenericHost
 {
-    internal class TestHostedService(IServiceProvider provider, ServiceHolder serviceHolder) : BackgroundService
+    internal class TestHostedService(IServiceProvider provider, ServiceHolder serviceHolder, Locker locker) : BackgroundService
     {
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -34,6 +30,7 @@ namespace GenericHost
                 Outer2(serviceHolder);
             }
 
+            locker.Set();
             return Task.CompletedTask;
         }
 

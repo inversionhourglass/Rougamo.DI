@@ -12,6 +12,7 @@ namespace GenericHost
 
             var serviceHolder = new ServiceHolder();
             var hostHolder = main.Execute(serviceHolder);
+            await hostHolder.WaitForExecuteAsync();
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine($"           outer equals: {serviceHolder.OuterService[0] == serviceHolder.OuterService[1]},\tisNull: {serviceHolder.OuterService[0] == null}");
             Console.WriteLine($"          inner1 equals: {serviceHolder.Inner1Service[0] == serviceHolder.Inner1Service[1]},\tisNull: {serviceHolder.OuterService[0] == null}");
