@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading;
 
 namespace Rougamo.Extensions.DependencyInjection.AspNetCore
 {
-    internal class NestableHttpContextScopeAccessor(IHttpContextAccessor httpContextAccessor) : IServiceScopeAccessor
+    internal class NestableHttpContextScopeAccessor(IHttpContextAccessor httpContextAccessor) : ScopeAccessor<IServiceScope>, IServiceScopeAccessor
     {
-        private static readonly AsyncLocal<ScopeChain?> _Scope = new();
-
-        public IServiceScope? Scope
+        public override IServiceScope? Scope
         {
             get
             {
