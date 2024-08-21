@@ -10,6 +10,22 @@
 | [Rougamo.Extensions.DependencyInjection.GenericHost](#rougamoextensionsdependencyinjectiongenerichost)              | 使用官方`DependencyInjection`，适用于非AspNetCore的Generic Host项目                     |
 | [Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore](#rougamoextensionsdependencyinjectionautofacaspnetcore) | 使用`Autofac`，结合当前`HttpContext`，返回正确scope的`ILifetimeScope`                   |
 | [Rougamo.Extensions.DependencyInjection.Autofac](#rougamoextensionsdependencyinjectionautofac)                      | 使用`Autofac`，适用于非AspNetCore项目                                                  |
+| Rougamo.Extensions.DependencyInjection.Abstractions                                                                 | 所有其他包的基础抽象包                                                                  |
+| Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions                                                      | 所有AspNetCore相关包的基础抽象包                                                        |
+
+## 版本号说明
+
+**所有版本号格式都采用语义版本号（SemVer）**
+
+1. 两个基础抽象包的版本从`1.0.0`开始增加
+    - `Rougamo.Extensions.DependencyInjection.Abstractions`
+    - `Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions`
+2. 微软官方DI扩展包，主版本号与官方包（`Microsoft.Extensions.*`）相同
+    - `Rougamo.Extensions.DependencyInjection.AspNetCore`
+    - `Rougamo.Extensions.DependencyInjection.GenericHost`
+3. Autofac扩展包，主版本号与官方包（`Autofac`）相同
+    - `Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore`
+    - `Rougamo.Extensions.DependencyInjection.Autofac`
 
 ## Rougamo.Extensions.DependencyInjection.AspNetCore
 

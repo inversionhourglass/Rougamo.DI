@@ -4,10 +4,28 @@
 
 ## Available Extensions
 
-| Package                                                                                                | Purpose                                                                                                                 |
-|:------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------|
-| [Rougamo.Extensions.DependencyInjection.AspNetCore](#rougamoextensionsdependencyinjectionaspnetcore)   | Uses the official `DependencyInjection` with the current `HttpContext` to return the correct scoped `IServiceProvider`. |
-| [Rougamo.Extensions.DependencyInjection.GenericHost](#rougamoextensionsdependencyinjectiongenerichost) | Uses the official `DependencyInjection`, designed for non-AspNetCore Generic Host projects.                             |
+| Package Name                                                                                                        | Description                                                                                                               |
+|:-------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------|
+| [Rougamo.Extensions.DependencyInjection.AspNetCore](#rougamoextensionsdependencyinjectionaspnetcore)                | Uses the official `DependencyInjection` and integrates with `HttpContext` to return the correct scoped `IServiceProvider` |
+| [Rougamo.Extensions.DependencyInjection.GenericHost](#rougamoextensionsdependencyinjectiongenerichost)              | Uses the official `DependencyInjection`, suitable for non-AspNetCore Generic Host projects                                |
+| [Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore](#rougamoextensionsdependencyinjectionautofacaspnetcore) | Uses `Autofac` and integrates with `HttpContext` to return the correct scoped `ILifetimeScope`                            |
+| [Rougamo.Extensions.DependencyInjection.Autofac](#rougamoextensionsdependencyinjectionautofac)                      | Uses `Autofac`, suitable for non-AspNetCore projects                                                                      |
+| Rougamo.Extensions.DependencyInjection.Abstractions                                                                 | The base abstraction package for all other packages                                                                       |
+| Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions                                                      | The base abstraction package for all AspNetCore-related packages                                                          |
+
+### Versioning Guidelines
+
+**All version numbers follow the Semantic Versioning (SemVer) format**
+
+1. The version numbers of the two foundational abstraction packages start from `1.0.0` and increase incrementally:
+    - `Rougamo.Extensions.DependencyInjection.Abstractions`
+    - `Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions`
+2. For Microsoft official DI extension packages, the major version matches the corresponding official package (e.g., `Microsoft.Extensions.*`):
+    - `Rougamo.Extensions.DependencyInjection.AspNetCore`
+    - `Rougamo.Extensions.DependencyInjection.GenericHost`
+3. For Autofac extension packages, the major version matches the corresponding official `Autofac` package:
+    - `Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore`
+    - `Rougamo.Extensions.DependencyInjection.Autofac`
 
 ## Rougamo.Extensions.DependencyInjection.AspNetCore
 
