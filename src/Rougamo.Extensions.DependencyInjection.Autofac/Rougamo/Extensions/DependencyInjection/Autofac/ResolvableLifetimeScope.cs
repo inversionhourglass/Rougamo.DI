@@ -1,14 +1,9 @@
-﻿#if NET6_0_OR_GREATER
-using System.Runtime.Loader;
-#endif
-
-using Autofac;
+﻿using Autofac;
 using Autofac.Core;
 using Autofac.Core.Lifetime;
 using Autofac.Core.Resolving;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Rougamo.Extensions.DependencyInjection.Autofac
 {
@@ -38,13 +33,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
             remove => scope.ResolveOperationBeginning -= value;
         }
 
-#if NET8_0
-        public object ResolveComponent(in ResolveRequest request) => scope.ResolveComponent(in request);
-#elif NET6_0_OR_GREATER
-        public object ResolveComponent(ResolveRequest request) => scope.ResolveComponent(request);
-#else
         public object ResolveComponent(IComponentRegistration registration, IEnumerable<Parameter> parameters) => scope.ResolveComponent(registration, parameters);
-#endif
 
         public ILifetimeScope BeginLifetimeScope() => scope.BeginLifetimeScope();
 
@@ -53,21 +42,6 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
         public ILifetimeScope BeginLifetimeScope(Action<ContainerBuilder> configurationAction) => scope.BeginLifetimeScope(configurationAction);
 
         public ILifetimeScope BeginLifetimeScope(object tag, Action<ContainerBuilder> configurationAction) => scope.BeginLifetimeScope(tag, configurationAction);
-
-#if NET7_0_OR_GREATER
-        public ILifetimeScope BeginLoadContextLifetimeScope(AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => scope.BeginLoadContextLifetimeScope(loadContext, configurationAction);
-
-        public ILifetimeScope BeginLoadContextLifetimeScope(object tag, AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => scope.BeginLoadContextLifetimeScope(tag, loadContext, configurationAction);
-#endif
-
-#if NET6_0_OR_GREATER
-        public ValueTask DisposeAsync()
-        {
-            accessor.Scope = null;
-
-            return scope.DisposeAsync();
-        }
-#endif
 
         public void Dispose()
         {
