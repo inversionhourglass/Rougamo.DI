@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../../common.props" />
 
   <PropertyGroup>
@@ -12,8 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions.csproj" />
-    <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj" />
+    <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.Autofac\Rougamo.Extensions.DependencyInjection.Autofac.csproj" />
   </ItemGroup>
 
 </Project>

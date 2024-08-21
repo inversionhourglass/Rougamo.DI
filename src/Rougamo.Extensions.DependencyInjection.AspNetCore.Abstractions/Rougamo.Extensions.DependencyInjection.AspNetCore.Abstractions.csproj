@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions.csproj" />
-    <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj" />
+    <ProjectReference Include="..\Rougamo.Extensions.DependencyInjection.Abstractions\Rougamo.Extensions.DependencyInjection.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

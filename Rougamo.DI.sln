@@ -32,7 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHost", "test\TestAsse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Autofac", "src\Rougamo.Extensions.DependencyInjection.Autofac\Rougamo.Extensions.DependencyInjection.Autofac.csproj", "{CC5020C5-6C7A-492A-B43E-E540BCEB9E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.Abstractions", "src\Rougamo.Extensions.DependencyInjection.Abstractions\Rougamo.Extensions.DependencyInjection.Abstractions.csproj", "{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Abstractions", "src\Rougamo.Extensions.DependencyInjection.Abstractions\Rougamo.Extensions.DependencyInjection.Abstractions.csproj", "{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore.csproj", "{37E31432-4157-4F04-98DF-E569CBFB726E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions", "src\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions.csproj", "{7045D528-5AAE-4200-9FF1-EEA2379DAD33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +76,14 @@ Global
 		{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E31432-4157-4F04-98DF-E569CBFB726E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E31432-4157-4F04-98DF-E569CBFB726E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E31432-4157-4F04-98DF-E569CBFB726E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E31432-4157-4F04-98DF-E569CBFB726E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +98,8 @@ Global
 		{1ED4A3EA-B7AA-4561-AFDC-1057D5534EA9} = {6A069E23-FBE6-4390-9D7D-D9041D72541D}
 		{CC5020C5-6C7A-492A-B43E-E540BCEB9E4D} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{AA57FD23-E2E2-4C51-8FBE-35EC45C03965} = {90A46C2A-2253-44D9-A8AE-94428744C324}
+		{37E31432-4157-4F04-98DF-E569CBFB726E} = {90A46C2A-2253-44D9-A8AE-94428744C324}
+		{7045D528-5AAE-4200-9FF1-EEA2379DAD33} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E83BB482-D1DC-47D6-960A-328497C04AEC}
