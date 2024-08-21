@@ -198,3 +198,12 @@ public class TestAttribute : MoAttribute
     }
 }
 ```
+
+### 在Framework项目中使用
+
+如果你的项目是老的WebForm或WinForm、WPF等项目，没有使用`Microsoft.Extensions.*`系列包，那么在应用初始化创建`ContainerBuilder`时直接调用扩展方法`RegisterRougamo`即可。
+
+```csharp
+var builder = new ContainerBuilder();
+builder.RegisterRougamo();
+```

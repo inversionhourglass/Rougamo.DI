@@ -200,3 +200,12 @@ public class TestAttribute : MoAttribute
     }
 }
 ```
+
+### Usage in Framework Projects
+
+If your project is an older WebForm, WinForm, WPF, or similar project that does not use the `Microsoft.Extensions.*` packages, you can directly call the `RegisterRougamo` extension method when initializing the `ContainerBuilder`.
+
+```csharp
+var builder = new ContainerBuilder();
+builder.RegisterRougamo();
+```
