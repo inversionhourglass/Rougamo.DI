@@ -1,4 +1,5 @@
-﻿using RougamoDefLib;
+﻿using Autofac;
+using RougamoDefLib;
 using System;
 using System.Threading.Tasks;
 
@@ -8,6 +9,26 @@ namespace GenericHost
     {
         static async Task Main(string[] args)
         {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<TestService>().As<ITestService>().InstancePerLifetimeScope();
+            builder.RegisterBuildCallback(scope =>
+            {
+
+            });
+            var container = builder.Build();
+
+            using (var s = container.BeginLifetimeScope())
+            {
+                using (var s1 = s.BeginLifetimeScope())
+                {
+                    using (var s2 = s1.BeginLifetimeScope())
+                    {
+
+                    }
+                }
+            }
+
             var main = new Main();
 
             var serviceHolder = new ServiceHolder();

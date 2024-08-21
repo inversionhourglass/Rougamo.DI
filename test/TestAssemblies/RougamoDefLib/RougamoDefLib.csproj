@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" /> <!--别改这个版本，改了之后跑一下测试-->
     <PackageReference Include="Rougamo.Fody" Version="4.0.0" PrivateAssets="contentfiles;analyzers" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.Autofac\Rougamo.Extensions.DependencyInjection.Autofac.csproj" />
     <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj" />
   </ItemGroup>
 

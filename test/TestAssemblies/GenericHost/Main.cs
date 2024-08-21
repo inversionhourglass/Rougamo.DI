@@ -1,22 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Rougamo.Context;
 using RougamoDefLib;
-using System;
-using System.Threading.Tasks;
 
 namespace GenericHost
 {
-    public class Main
+    public class Main : BaseMain
     {
-        public HostHolder Execute(ServiceHolder serviceHolder) => Execute(serviceHolder, true, true);
-
-        public HostHolder ExecuteWithoutRougamo(ServiceHolder serviceHolder) => Execute(serviceHolder, false, true);
-
-        public HostHolder ExecuteTransient(ServiceHolder serviceHolder) => Execute(serviceHolder, true, false);
-
-        private HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped)
+        protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped)
         {
             ServiceProviderHolderAccessor.SetRootNull();
+            ContextExtensions.SetMicrosoft();
 
             var locker = new Locker();
             var builder = Host.CreateDefaultBuilder();
@@ -28,6 +22,7 @@ namespace GenericHost
                 services.AddSingleton(locker);
                 services.AddSingleton(serviceHolder);
                 services.Add(descriptor);
+                services.AddTransient<IScopeProvider, MicrosoftScopeProvider>();
                 services.AddHostedService<TestHostedService>();
 
                 if (enableRougamo)
@@ -45,28 +40,6 @@ namespace GenericHost
             host.Start();
 
             return new HostHolder(host, locker);
-        }
-
-        public sealed class HostHolder(IHost host, Locker locker) : IAsyncDisposable
-        {
-            public Task WaitForExecuteAsync()
-            {
-                return locker.WaitForExecuteAsync();
-            }
-
-            public async ValueTask DisposeAsync()
-            {
-                await host.StopAsync();
-
-                if (host is IAsyncDisposable asyncDisposable)
-                {
-                    await asyncDisposable.DisposeAsync();
-                }
-                else
-                {
-                    host.Dispose();
-                }
-            }
         }
     }
 }
