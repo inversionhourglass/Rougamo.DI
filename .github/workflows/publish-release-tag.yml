@@ -48,9 +48,8 @@ jobs:
             $aspnetcore = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.AspNetCore.*.nupkg"
             $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } elseif ($tagName -like "autofac-*") {
-            $genericHost = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.Autofac.*.nupkg"
-            $aspnetcore = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore.*.nupkg"
-            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
+            $autofac = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.Autofac.*.nupkg"
+            $nupkgs = $autofac.FullName
           } else {
             $nupkgs = @()
           }
