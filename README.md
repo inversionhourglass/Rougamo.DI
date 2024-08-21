@@ -1,5 +1,7 @@
 # Rougamo.DI
 
+中文 | [English](README_en.md)
+
 `Rougamo.DI`提供了一系列 Rougamo(https://github.com/inversionhourglass/Rougamo) 的IoC/DI扩展，使你在使用 [Rougamo](https://github.com/inversionhourglass/Rougamo) 时获得更好的IoC/DI交互体验。
 
 ## 当前扩展一览
