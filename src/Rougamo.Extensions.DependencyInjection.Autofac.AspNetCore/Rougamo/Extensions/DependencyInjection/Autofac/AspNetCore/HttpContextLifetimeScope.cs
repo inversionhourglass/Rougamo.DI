@@ -9,6 +9,7 @@ using Autofac.Core.Resolving;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
@@ -41,6 +42,14 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
             remove => _scope.ResolveOperationBeginning -= value;
         }
 
+#if NET8_0
+        public object ResolveComponent(in ResolveRequest request) => _scope.ResolveComponent(in request);
+#elif NET6_0_OR_GREATER
+        public object ResolveComponent(ResolveRequest request) => _scope.ResolveComponent(request);
+#else
+        public object ResolveComponent(IComponentRegistration registration, IEnumerable<Parameter> parameters) => _scope.ResolveComponent(registration, parameters);
+#endif
+
         public ILifetimeScope BeginLifetimeScope() => _scope.BeginLifetimeScope();
 
         public ILifetimeScope BeginLifetimeScope(object tag) => _scope.BeginLifetimeScope(tag);
@@ -49,24 +58,23 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
 
         public ILifetimeScope BeginLifetimeScope(object tag, Action<ContainerBuilder> configurationAction) => _scope.BeginLifetimeScope(tag, configurationAction);
 
-#if NET6_0_OR_GREATER
+#if NET7_0_OR_GREATER
         public ILifetimeScope BeginLoadContextLifetimeScope(AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => _scope.BeginLoadContextLifetimeScope(loadContext, configurationAction);
 
         public ILifetimeScope BeginLoadContextLifetimeScope(object tag, AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => _scope.BeginLoadContextLifetimeScope(tag, loadContext, configurationAction);
+#endif
+
+#if NET6_0_OR_GREATER
+        public ValueTask DisposeAsync()
+        {
+            // Do nothing, scope is managed by HttpContext
+            return default;
+        }
 #endif
 
         public void Dispose()
         {
             // Do nothing, scope is managed by HttpContext
         }
-
-        public ValueTask DisposeAsync()
-        {
-            // Do nothing, scope is managed by HttpContext
-
-            return default;
-        }
-
-        public object ResolveComponent(in ResolveRequest request) => _scope.ResolveComponent(in request);
     }
 }
