@@ -1,5 +1,7 @@
 ### Rougamo.DI
 
+[жпнд](README.md) | English
+
 `Rougamo.DI` provides a set of IoC/DI extensions for [Rougamo](https://github.com/inversionhourglass/Rougamo) that enhance the IoC/DI interaction experience when using Rougamo.
 
 ## Available Extensions
