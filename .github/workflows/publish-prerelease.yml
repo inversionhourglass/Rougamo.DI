@@ -33,7 +33,7 @@ jobs:
       - name: Abstractions Version Setup
         run: |
           $branchName = "${{ github.ref_name }}"
-          if ($branchName -ne "pre/abstract" && $branchName -notlike "pre/*-full") {
+          if (($branchName -ne "pre/abstract") -and ($branchName -notlike "pre/*-full")) {
             $abstractions = @("Rougamo.Extensions.DependencyInjection.Abstractions", "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions")
             foreach ($packageName in $abstractions) {
               # 在不进行全量发布时，将公用抽象项目的版本号固定为NuGet上的最新版本号
