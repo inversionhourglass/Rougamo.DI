@@ -78,16 +78,16 @@ jobs:
         run: |
           $tagName = "${{ github.ref_name }}"
           if ($tagName -like "microsoft-*") {
-            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
-            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+\.nupkg" }
             $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } elseif ($tagName -like "autofac-*") {
-            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
-            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+\.nupkg" }
             $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } elseif ($tagName -like "abstract-*") {
-            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
-            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+\.nupkg" }
             $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } else {
             $nupkgs = @()
