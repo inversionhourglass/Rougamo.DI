@@ -48,7 +48,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
 #if NET5_0_OR_GREATER
         public ILifetimeScope BeginLoadContextLifetimeScope(AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => scope.BeginLoadContextLifetimeScope(loadContext, configurationAction);
 
-        public ILifetimeScope BeginLoadContextLifetimeScope(object tag, AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => scope.BeginLoadContextLifetimeScope(loadContext, configurationAction);
+        public ILifetimeScope BeginLoadContextLifetimeScope(object tag, AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => scope.BeginLoadContextLifetimeScope(tag, loadContext, configurationAction);
 #endif
 
         public void Dispose()

@@ -9,7 +9,7 @@ namespace Autofac
         /// <summary>
         /// Register Autofac into Rougamo
         /// </summary>
-        public static ContainerBuilder RegisterIntoRougamo(this ContainerBuilder builder)
+        public static ContainerBuilder RegisterRougamo(this ContainerBuilder builder)
         {
             builder.RegisterILifetimeScopeAccessor();
             builder.RegisterBuildCallback(scope => ContainerHolder.Root ??= scope);
@@ -22,7 +22,7 @@ namespace Autofac
         /// </summary>
         public static ContainerBuilder RegisterILifetimeScopeAccessor(this ContainerBuilder builder)
         {
-            builder.RegisterType<LifetimeScopeAccessor>().As<ILifetimeScopeAccessor>().SingleInstance();
+            builder.RegisterType<LifetimeScopeAccessor>().As<ILifetimeScopeAccessor>().SingleInstance().IfNotRegistered(typeof(ILifetimeScopeAccessor));
 
             return builder;
         }

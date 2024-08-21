@@ -4,7 +4,7 @@ using System.Threading;
 namespace Rougamo.Extensions.DependencyInjection
 {
     /// <summary>
-    /// <inheritdoc />
+    /// <inheritdoc cref="IScopeAccessor{TScope}" />
     /// </summary>
     public class ScopeAccessor<TScope> : IScopeAccessor<TScope> where TScope : class
     {
