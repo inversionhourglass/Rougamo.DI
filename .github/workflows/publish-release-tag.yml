@@ -34,11 +34,18 @@ jobs:
           if ($tagName -notlike "abstract-*") {
             $abstractions = @("Rougamo.Extensions.DependencyInjection.Abstractions", "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions")
             foreach ($packageName in $abstractions) {
-              # 在不进行全量发布时，将公用抽象项目的版本号固定为NuGet上的最新正式版的版本号
-              $nugetUrl = "https://api.nuget.org/v3-flatcontainer/$packageName/index.json"
-              $versions = (Invoke-RestMethod -Uri $nugetUrl).versions
-              $latestVersion = $versions | Where-Object { $_ -notmatch "-preview-" } | Select-Object -Last 1
-              echo "$packageName latest version: $latestVersion"
+              # 从nuget.org获取最新正式版的版本号
+              $pattern = "^> $packageName \| (\S+) "
+              $packages = nuget search $packageName
+              foreach ($pkg in $packages) {
+                if ($pkg -match $pattern) {
+                  $latestVersion = $matches[1]
+                }
+              }
+              if ($latestVersion -eq $null) {
+                throw "Cannot get the latest stable version of $packageName from nuget.org"
+              }
+              echo "The latest stable version of $packageName is $latestVersion"
 
               # 修改项目文件版本号
               $xmlPath = "src/$packageName/$packageName.csproj"
