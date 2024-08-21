@@ -5,9 +5,15 @@
     <Nullable>enable</Nullable>
 	<LangVersion>latest</LangVersion>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.AspNetCore\Rougamo.Extensions.DependencyInjection.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore.csproj" />
     <ProjectReference Include="..\RougamoDefLib\RougamoDefLib.csproj" />
   </ItemGroup>
 

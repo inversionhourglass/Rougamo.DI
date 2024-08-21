@@ -33,7 +33,7 @@ namespace GenericHost
                     builder.RegisterInstance(serviceHolder).SingleInstance();
                     if (enableRougamo)
                     {
-                        builder.RegisterIntoRougamo();
+                        builder.RegisterRougamo();
                     }
                     else
                     {

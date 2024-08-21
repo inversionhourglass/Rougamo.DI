@@ -1,27 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using RougamoDefLib.Attributes;
 using RougamoDefLib;
-using System;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApiHost.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TestController(IServiceProvider provider, ServiceHolder serviceHolder) : ControllerBase
+    public class TestController(IScopeProvider provider, ServiceHolder serviceHolder, IHttpContextAccessor accesor) : ControllerBase
     {
         [HttpGet]
         public string Get()
         {
+            var httpContext = accesor.HttpContext;
             Outer1(serviceHolder);
 
-            using (var innerScope1 = provider.CreateResolvableScope())
+            using (var innerScope1 = provider.CreateScope())
             {
                 Inner11(serviceHolder);
                 Inner12(serviceHolder);
             }
 
-            using (var innerScope2 = provider.CreateResolvableScope())
+            using (var innerScope2 = provider.CreateScope())
             {
                 Inner21(serviceHolder);
                 Inner22(serviceHolder);

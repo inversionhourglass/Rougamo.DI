@@ -8,7 +8,7 @@ namespace WebApiHost
         public static async Task Main(string[] args)
         {
             var serviceHolder = new ServiceHolder();
-            var main = new Main();
+            var main = new AutofacMain();//new Main();
 
             var hostHolder = main.Execute(serviceHolder);
 

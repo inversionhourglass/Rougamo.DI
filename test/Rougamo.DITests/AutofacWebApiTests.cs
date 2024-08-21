@@ -3,7 +3,7 @@ using WebApiHost;
 
 namespace Rougamo.DITests
 {
-    public class WebApiHostTests : BaseWebApiTests<Main>
+    public class AutofacWebApiTests : BaseWebApiTests<AutofacMain>
     {
     }
 }

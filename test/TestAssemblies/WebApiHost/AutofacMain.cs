@@ -7,20 +7,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using System.Linq;
 using Rougamo.Context;
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
 
 namespace WebApiHost
 {
-    public class Main : BaseMain
+    public class AutofacMain : BaseMain
     {
         protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool nestableScope)
         {
-            ServiceProviderHolderAccessor.SetRootNull();
-            ContextExtensions.SetMicrosoft();
+            ContainerHolderAccessor.SetRootNull();
+            ContextExtensions.SetAutofac();
 
             IHost host;
 #if NET6_0_OR_GREATER
             var builder = WebApplication.CreateBuilder();
             builder.WebHost.UseUrls("http://127.0.0.1:0");
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
 
             ConfigureServices(builder.Services);
 
@@ -32,6 +36,8 @@ namespace WebApiHost
 #else
             host = Host
                     .CreateDefaultBuilder()
+                    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                    .ConfigureContainer<ContainerBuilder>(ConfigureContainer)
                     .ConfigureWebHostDefaults(builder =>
                     {
                         builder
@@ -48,28 +54,37 @@ namespace WebApiHost
 
             return new HostHolder(host, addressesFeature!.Addresses.First());
 
-            void ConfigureServices(IServiceCollection services)
+            void ConfigureContainer(ContainerBuilder builder)
             {
-                services.AddControllers().AddCurrentApplicationPart();
-
-                var descriptor = new ServiceDescriptor(typeof(ITestService), typeof(TestService), scoped ? ServiceLifetime.Scoped : ServiceLifetime.Transient);
-
-                services.AddTransient<IScopeProvider, MicrosoftScopeProvider>();
-                services.AddSingleton(serviceHolder);
-                services.Add(descriptor);
-
-                if (nestableScope)
+                if (scoped)
                 {
-                    services.AddNestableHttpContextScopeAccessor();
-                }
-                if (enableRougamo)
-                {
-                    services.AddRougamoAspNetCore();
+                    builder.RegisterType<TestService>().As<ITestService>().InstancePerLifetimeScope();
                 }
                 else
                 {
-                    services.AddHttpContextScopeAccessor();
+                    builder.RegisterType<TestService>().As<ITestService>().InstancePerDependency();
                 }
+                builder.RegisterInstance(serviceHolder).SingleInstance();
+                builder.RegisterType<AutofacScopeProvider>().As<IScopeProvider>().InstancePerDependency();
+
+                if (nestableScope)
+                {
+                    builder.RegisterAutofacNestableHttpContextScopeAccessor();
+                }
+                if (enableRougamo)
+                {
+                    builder.RegisterRougamoAspNetCore();
+                }
+                else
+                {
+                    builder.RegisterAutofacHttpContextScopeAccessor();
+                }
+            }
+
+            void ConfigureServices(IServiceCollection services)
+            {
+                services.AddControllers().AddCurrentApplicationPart();
+                services.AddHttpContextAccessor();
             }
 
             void Configure(IApplicationBuilder app)
