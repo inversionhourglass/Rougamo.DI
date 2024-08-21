@@ -38,6 +38,7 @@ jobs:
             foreach ($packageName in $abstractions) {
               # 在不进行全量发布时，将公用抽象项目的版本号固定为NuGet上的最新版本号
               $nugetUrl = "https://api.nuget.org/v3-flatcontainer/$packageName/index.json"
+              echo "nugetUrl is '$nugetUrl'"
               $versions = (Invoke-RestMethod -Uri $nugetUrl).versions
               $latestVersion = $versions | Select-Object -Last 1
               echo "$packageName latest version: $latestVersion"
