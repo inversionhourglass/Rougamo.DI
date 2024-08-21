@@ -6,6 +6,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
 {
@@ -37,7 +38,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
             remove => _scope.ResolveOperationBeginning -= value;
         }
 
-        public object ResolveComponent(IComponentRegistration registration, IEnumerable<Parameter> parameters) => _scope.ResolveComponent(registration, parameters);
+        public object ResolveComponent(ResolveRequest request) => _scope.ResolveComponent(request);
 
         public ILifetimeScope BeginLifetimeScope() => _scope.BeginLifetimeScope();
 
@@ -50,6 +51,13 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
         public void Dispose()
         {
             // Do nothing, scope is managed by HttpContext
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            // Do nothing, scope is managed by HttpContext
+
+            return default;
         }
     }
 }

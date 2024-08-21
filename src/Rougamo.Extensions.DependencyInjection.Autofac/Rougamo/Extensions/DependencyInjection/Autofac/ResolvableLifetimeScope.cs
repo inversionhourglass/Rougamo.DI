@@ -3,7 +3,7 @@ using Autofac.Core;
 using Autofac.Core.Lifetime;
 using Autofac.Core.Resolving;
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Rougamo.Extensions.DependencyInjection.Autofac
 {
@@ -33,7 +33,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
             remove => scope.ResolveOperationBeginning -= value;
         }
 
-        public object ResolveComponent(IComponentRegistration registration, IEnumerable<Parameter> parameters) => scope.ResolveComponent(registration, parameters);
+        public object ResolveComponent(ResolveRequest request) => scope.ResolveComponent(request);
 
         public ILifetimeScope BeginLifetimeScope() => scope.BeginLifetimeScope();
 
@@ -48,6 +48,13 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
             accessor.Scope = null;
 
             scope.Dispose();
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            accessor.Scope = null;
+
+            return scope.DisposeAsync();
         }
     }
 }

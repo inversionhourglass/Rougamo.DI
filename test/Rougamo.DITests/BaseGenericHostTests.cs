@@ -1,5 +1,4 @@
-﻿#if !NET5_0
-using GenericHost;
+﻿using GenericHost;
 using RougamoDefLib;
 using System.Threading.Tasks;
 using Xunit;
@@ -78,4 +77,3 @@ namespace Rougamo.DITests
         }
     }
 }
-#endif
