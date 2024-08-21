@@ -28,6 +28,33 @@ jobs:
       - name: Restore NuGets
         run: dotnet restore ${{ env.SOLUTION }}
 
+      - name: Abstractions Version Setup
+        run: |
+          $tagName = "${{ github.ref_name }}"
+          if ($tagName -notlike "abstract-*") {
+            $abstractions = @("Rougamo.Extensions.DependencyInjection.Abstractions", "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions")
+            foreach ($packageName in $abstractions) {
+              # 在不进行全量发布时，将公用抽象项目的版本号固定为NuGet上的最新正式版的版本号
+              $nugetUrl = "https://api.nuget.org/v3-flatcontainer/$packageName/index.json"
+              $versions = (Invoke-RestMethod -Uri $nugetUrl).versions
+              $latestVersion = $versions | Where-Object { $_ -notmatch "-preview-" } | Select-Object -Last 1
+              echo "$packageName latest version: $latestVersion"
+
+              # 修改项目文件版本号
+              $xmlPath = "src/$packageName/$packageName.csproj"
+              [xml]$xmlDoc = Get-Content $xmlPath
+              $propertyGroup = $xmlDoc.Project.PropertyGroup
+              $versionPrefixNode = $propertyGroup.SelectSingleNode("VersionPrefix")
+              $newVersionNode = $xmlDoc.CreateElement("Version")
+              $newVersionNode.InnerText = $latestVersion
+              $propertyGroup.RemoveChild($versionPrefixNode)
+              $propertyGroup.AppendChild($newVersionNode)
+              $xmlDoc.Save($xmlPath)
+            }
+          } else {
+            echo "Do not need to setup abstraction projects' version."
+          }
+
       - name: Build Solution
         run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }}
 
@@ -44,12 +71,17 @@ jobs:
         run: |
           $tagName = "${{ github.ref_name }}"
           if ($tagName -like "microsoft-*") {
-            $genericHost = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.GenericHost.*.nupkg"
-            $aspnetcore = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.AspNetCore.*.nupkg"
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
             $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } elseif ($tagName -like "autofac-*") {
-            $autofac = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.Autofac.*.nupkg"
-            $nupkgs = $autofac.FullName
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
+          } elseif ($tagName -like "abstract-*") {
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } else {
             $nupkgs = @()
           }

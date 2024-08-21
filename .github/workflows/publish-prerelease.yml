@@ -29,29 +29,67 @@ jobs:
 
       - name: Restore NuGets
         run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Abstractions Version Setup
+        run: |
+          $branchName = "${{ github.ref_name }}"
+          if ($branchName -ne "pre/abstract" && $branchName -notlike "pre/*-full") {
+            $abstractions = @("Rougamo.Extensions.DependencyInjection.Abstractions", "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions")
+            foreach ($packageName in $abstractions) {
+              # 在不进行全量发布时，将公用抽象项目的版本号固定为NuGet上的最新版本号
+              $nugetUrl = "https://api.nuget.org/v3-flatcontainer/$packageName/index.json"
+              $versions = (Invoke-RestMethod -Uri $nugetUrl).versions
+              $latestVersion = $versions | Select-Object -Last 1
+              echo "$packageName latest version: $latestVersion"
+
+              # 修改项目文件版本号
+              $xmlPath = "src/$packageName/$packageName.csproj"
+              [xml]$xmlDoc = Get-Content $xmlPath
+              $propertyGroup = $xmlDoc.Project.PropertyGroup
+              $versionPrefixNode = $propertyGroup.SelectSingleNode("VersionPrefix")
+              $newVersionNode = $xmlDoc.CreateElement("Version")
+              $newVersionNode.InnerText = $latestVersion
+              $propertyGroup.RemoveChild($versionPrefixNode)
+              $propertyGroup.AppendChild($newVersionNode)
+              $xmlDoc.Save($xmlPath)
+            }
+          } else {
+            echo "Do not need to setup abstraction projects' version."
+          }
         
       - name: Build Solution
-        run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }} --version-suffix priview-${{ env.TIMESTAMP }}
+        run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }} --version-suffix preview-${{ env.TIMESTAMP }}
 
       - name: Delete exists packages
         run: Remove-Item -Path nugets -Recurse -Force -ErrorAction SilentlyContinue
 
       - name: Pack Solution
-        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-build --version-suffix priview-${{ env.TIMESTAMP }}
+        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-build --version-suffix preview-${{ env.TIMESTAMP }}
 
       - name: Publish
         run: |
           $branchName = "${{ github.ref_name }}"
-          if ($branchName -eq "pre/microsoft") {
-            $genericHost = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.GenericHost.*.nupkg"
-            $aspnetcore = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.AspNetCore.*.nupkg"
-            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
-          } elseif ($branchName -eq "pre/autofac") {
-            $autofac = Get-ChildItem -Path "nugets/Rougamo.Extensions.DependencyInjection.Autofac.*.nupkg"
-            $nupkgs = $autofac.FullName
+          if ($branchName -like "pre/*-full") {
+            # 全量发布先发布公用抽象项目
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            dotnet nuget push $genericHost.FullName -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+            dotnet nuget push $aspnetcore.FullName -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
+          }
+
+          if ($branchName -like "pre/microsoft*") {
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+          } elseif ($branchName -like "pre/autofac*") {
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+          } elseif ($branchName -eq "pre/abstract") {
+            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
           } else {
             throw "Unknown branch [$branchName]."
           }
+          $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           foreach ($nupkg in $nupkgs) {
             dotnet nuget push $nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
           }
