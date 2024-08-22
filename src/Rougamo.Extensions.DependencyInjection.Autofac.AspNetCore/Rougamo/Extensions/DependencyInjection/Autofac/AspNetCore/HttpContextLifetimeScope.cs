@@ -1,4 +1,8 @@
-﻿using Autofac;
+﻿#if NET6_0_OR_GREATER
+using System.Runtime.Loader;
+#endif
+
+using Autofac;
 using Autofac.Core;
 using Autofac.Core.Lifetime;
 using Autofac.Core.Resolving;
@@ -47,6 +51,12 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
         public ILifetimeScope BeginLifetimeScope(Action<ContainerBuilder> configurationAction) => _scope.BeginLifetimeScope(configurationAction);
 
         public ILifetimeScope BeginLifetimeScope(object tag, Action<ContainerBuilder> configurationAction) => _scope.BeginLifetimeScope(tag, configurationAction);
+
+#if NET6_0_OR_GREATER
+        public ILifetimeScope BeginLoadContextLifetimeScope(AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => _scope.BeginLoadContextLifetimeScope(loadContext, configurationAction);
+
+        public ILifetimeScope BeginLoadContextLifetimeScope(object tag, AssemblyLoadContext loadContext, Action<ContainerBuilder> configurationAction) => _scope.BeginLoadContextLifetimeScope(tag, loadContext, configurationAction);
+#endif
 
         public void Dispose()
         {
