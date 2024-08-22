@@ -37,7 +37,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac
             remove => scope.ResolveOperationBeginning -= value;
         }
 
-        public object ResolveComponent(ResolveRequest request) => scope.ResolveComponent(request);
+        public object ResolveComponent(in ResolveRequest request) => scope.ResolveComponent(in request);
 
         public ILifetimeScope BeginLifetimeScope() => scope.BeginLifetimeScope();
 

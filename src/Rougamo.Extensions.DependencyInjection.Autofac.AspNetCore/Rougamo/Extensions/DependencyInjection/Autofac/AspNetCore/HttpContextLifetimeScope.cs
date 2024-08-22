@@ -42,7 +42,7 @@ namespace Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore
             remove => _scope.ResolveOperationBeginning -= value;
         }
 
-        public object ResolveComponent(ResolveRequest request) => _scope.ResolveComponent(request);
+        public object ResolveComponent(in ResolveRequest request) => _scope.ResolveComponent(in request);
 
         public ILifetimeScope BeginLifetimeScope() => _scope.BeginLifetimeScope();
 
