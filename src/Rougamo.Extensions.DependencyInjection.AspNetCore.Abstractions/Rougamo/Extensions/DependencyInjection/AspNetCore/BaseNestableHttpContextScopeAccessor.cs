@@ -20,29 +20,24 @@ namespace Rougamo.Extensions.DependencyInjection.AspNetCore
                 {
                     if (httpContextAccessor.HttpContext == null) return null;
 
-                    _Scope.Value = scope = new();
-                    var currentScope = new TScopeBuilder().SetHttpContext(httpContextAccessor.HttpContext).Build();
-                    scope.Push(currentScope);
+                    var httpScope = new TScopeBuilder().SetHttpContext(httpContextAccessor.HttpContext).Build();
+                    _Scope.Value = scope = new(httpScope, null);
 
-                    return currentScope;
+                    return httpScope;
                 }
-                return scope.Peek();
+                return scope.Current;
             }
             set
             {
+                var scope = _Scope.Value;
                 if (value == null)
                 {
-                    var scope = _Scope.Value;
                     if (scope == null) return;
-                    if (!scope.TryPop()) _Scope.Value = null;
+                    _Scope.Value = scope.Parent;
                 }
                 else
                 {
-                    if (Scope == null)
-                    {
-                        _Scope.Value = new();
-                    }
-                    _Scope.Value!.Push(value);
+                    _Scope.Value = new(value, scope);
                 }
             }
         }
