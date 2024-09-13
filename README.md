@@ -57,30 +57,6 @@ public class TestAttribute : MoAttribute
 }
 ```
 
-### 非HttpContext Scope
-
-默认情况下通过`MethodContext`的扩展方法`GetServiceProvider`只会尝试获取当前`HttpContext`对应scope的`IServiceProvider`，如果当前没有`HttpContext`，那么就会返回根`IServiceProvider`。这样的设计是因为一般而言我们不会在AspNetCore的项目中手动创建一个scope，如果你确实有手动创建scope的场景需求，请按如下的方式操作：
-
-```csharp
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    // ...省略其他步骤
-    builder.Services.AddNestableHttpContextScopeAccessor();  // 额外的注册步骤
-    builder.Services.AddRougamoAspNetCore();
-    // ...省略其他步骤
-}
-
-public class Cls(IServiceProvider services)
-{
-    public void M()
-    {
-        // 调用扩展方法CreateResolvableScope创建scope，这里如果使用CreateScope来创建，那么这个scope将无法在切面类型中获取到
-        using var scope = services.CreateResolvableScope();
-    }
-}
-```
-
 ## Rougamo.Extensions.DependencyInjection.GenericHost
 
 ```csharp
@@ -137,36 +113,6 @@ public class TestAttribute : MoAttribute
 
         // 使用ILifetimeScope
         var xxx = scope.Resolve<IXxx>();
-    }
-}
-```
-
-### 非HttpContext Scope
-
-默认情况下通过`MethodContext`的扩展方法`GetAutofacCurrentScope`只会尝试获取当前`HttpContext`对应的`ILifetimeScope`，如果当前没有`HttpContext`，那么就会返回根`IServiceProvider`。这样的设计是因为一般而言我们不会在AspNetCore的项目中手动创建一个scope，如果你确实有手动创建scope的场景需求，请按如下的方式操作：
-
-```csharp
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    builder.Host
-            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(builder =>
-            {
-                builder.RegisterAutofacNestableHttpContextScopeAccessor(); // 额外的注册步骤
-                builder.RegisterRougamoAspNetCore();
-            });
-    
-    // 注册IHttpContextAccessor也是必须的
-    builder.Services.AddHttpContextAccessor();
-}
-
-public class Cls(IServiceProvider services)
-{
-    public void M()
-    {
-        // 调用扩展方法BeginResolvableLifetimeScope创建scope，这里如果使用BeginLifetimeScope来创建，那么这个scope将无法在切面类型中获取到
-        using var scope = services.BeginResolvableLifetimeScope();
     }
 }
 ```
