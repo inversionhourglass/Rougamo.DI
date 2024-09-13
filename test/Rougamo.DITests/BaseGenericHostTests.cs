@@ -25,8 +25,12 @@ namespace Rougamo.DITests
             Assert.NotNull(serviceHolder.Inner2Service[0]);
             Assert.Equal(serviceHolder.Inner2Service[0], serviceHolder.Inner2Service[1]);
 
+            Assert.NotNull(serviceHolder.ParallelService[0]);
+            Assert.NotEqual(serviceHolder.ParallelService[0], serviceHolder.ParallelService[1]);
+
             Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner1Service[0]);
             Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner2Service[0]);
+            Assert.Equal(serviceHolder.OuterService[0], serviceHolder.ParallelService[0]);
 
             await hostHolder.DisposeAsync();
         }
