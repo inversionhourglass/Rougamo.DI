@@ -9,13 +9,13 @@ namespace WebApiHost
     {
         public HostHolder Execute(ServiceHolder serviceHolder) => Execute(serviceHolder, true, true, false);
 
-        public HostHolder ExecuteNestableScope(ServiceHolder serviceHolder) => Execute(serviceHolder, true, true, true);
+        public HostHolder ExecuteDisableNestableScope(ServiceHolder serviceHolder) => Execute(serviceHolder, true, true, true);
 
-        public HostHolder ExecuteWithoutRougamo(ServiceHolder serviceHolder) => Execute(serviceHolder, false, true, true);
+        public HostHolder ExecuteWithoutRougamo(ServiceHolder serviceHolder) => Execute(serviceHolder, false, true, false);
 
-        public HostHolder ExecuteTransient(ServiceHolder serviceHolder) => Execute(serviceHolder, true, false, true);
+        public HostHolder ExecuteTransient(ServiceHolder serviceHolder) => Execute(serviceHolder, true, false, false);
 
-        protected abstract HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool nestableScope);
+        protected abstract HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool disableNestableScope);
 
         public sealed class HostHolder(IHost host, string address) : IAsyncDisposable
         {

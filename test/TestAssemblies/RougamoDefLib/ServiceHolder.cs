@@ -7,5 +7,7 @@
         public ITestService?[] Inner1Service { get; } = new TestService[2];
 
         public ITestService?[] Inner2Service { get; } = new TestService[2];
+
+        public ITestService?[] ParallelService { get; } = new TestService[2];
     }
 }

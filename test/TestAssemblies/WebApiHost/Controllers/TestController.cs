@@ -3,6 +3,8 @@ using RougamoDefLib.Attributes;
 using RougamoDefLib;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace WebApiHost.Controllers
 {
@@ -11,7 +13,7 @@ namespace WebApiHost.Controllers
     public class TestController(IScopeProvider provider, ServiceHolder serviceHolder, IHttpContextAccessor accesor) : ControllerBase
     {
         [HttpGet]
-        public string Get()
+        public async Task<string> Get()
         {
             var httpContext = accesor.HttpContext;
             Outer1(serviceHolder);
@@ -27,6 +29,25 @@ namespace WebApiHost.Controllers
                 Inner21(serviceHolder);
                 Inner22(serviceHolder);
             }
+
+            var locker1 = new EventWaitHandle(false, EventResetMode.ManualReset);
+            var locker2 = new EventWaitHandle(false, EventResetMode.ManualReset);
+            var t1 = Task.Run(() =>
+            {
+                locker1.WaitOne();
+                Parallel1(serviceHolder);
+                locker2.Set();
+            });
+            var t2 = Task.Run(() =>
+            {
+                using (var pScope = provider.CreateScope())
+                {
+                    Parallel2(serviceHolder);
+                    locker1.Set();
+                    locker2.WaitOne();
+                }
+            });
+            await Task.WhenAll(t1, t2);
 
             Outer2(serviceHolder);
 
@@ -61,5 +82,11 @@ namespace WebApiHost.Controllers
 
         [Inner2(1)]
         private void Inner22(ServiceHolder serviceHolder) { }
+
+        [Parallel(0)]
+        private void Parallel1(ServiceHolder serviceHolder) { }
+
+        [Parallel(1)]
+        private void Parallel2(ServiceHolder serviceHolder) { }
     }
 }

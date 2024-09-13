@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 
 namespace Rougamo.Extensions.DependencyInjection
 {
@@ -19,7 +18,7 @@ namespace Rougamo.Extensions.DependencyInjection
         {
             get
             {
-                return _Scope.Value?.Peek();
+                return _Scope.Value?.Current;
             }
             set
             {
@@ -28,38 +27,22 @@ namespace Rougamo.Extensions.DependencyInjection
                 if (value == null)
                 {
                     if (scope == null) return;
-                    if (!scope.TryPop()) _Scope.Value = null;
+                    _Scope.Value = scope.Parent;
                 }
-                else
+                else if (scope?.Current != value)
                 {
-                    if (scope == null)
-                    {
-                        _Scope.Value = scope = new();
-                    }
-                    scope.Push(value);
+                    _Scope.Value = new(value, scope);
                 }
             }
         }
 
         /// <summary>
         /// </summary>
-        protected class ScopeChain : Stack<TScope>
+        protected internal sealed class ScopeChain(TScope scope, ScopeChain? parent)
         {
-            /// <summary>
-            /// </summary>
-            public bool TryPop()
-            {
-#if NETSTANDARD2_0
-                if (Count > 0)
-                {
-                    Pop();
-                    return true;
-                }
-                return false;
-#else
-                return TryPop(out _);
-#endif
-            }
+            public TScope Current { get; } = scope;
+
+            public ScopeChain? Parent { get; } = parent;
         }
     }
 }
