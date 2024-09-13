@@ -12,7 +12,7 @@ namespace WebApiHost
 {
     public class Main : BaseMain
     {
-        protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool nestableScope)
+        protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool disableNestableScope)
         {
             ServiceProviderHolderAccessor.SetRootNull();
             ContextExtensions.SetMicrosoft();
@@ -58,9 +58,9 @@ namespace WebApiHost
                 services.AddSingleton(serviceHolder);
                 services.Add(descriptor);
 
-                if (nestableScope)
+                if (disableNestableScope)
                 {
-                    services.AddNestableHttpContextScopeAccessor();
+                    services.AddHttpContextScopeAccessor();
                 }
                 if (enableRougamo)
                 {
@@ -68,7 +68,7 @@ namespace WebApiHost
                 }
                 else
                 {
-                    services.AddHttpContextScopeAccessor();
+                    services.AddNestableHttpContextScopeAccessor();
                 }
             }
 

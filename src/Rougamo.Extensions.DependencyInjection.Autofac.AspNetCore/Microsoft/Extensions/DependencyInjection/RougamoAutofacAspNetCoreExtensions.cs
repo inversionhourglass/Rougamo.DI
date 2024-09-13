@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         public static ContainerBuilder RegisterRougamoAspNetCore(this ContainerBuilder builder)
         {
-            builder.RegisterAutofacHttpContextScopeAccessor();
+            builder.RegisterAutofacNestableHttpContextScopeAccessor();
             builder.RegisterRougamo();
 
             return builder;
