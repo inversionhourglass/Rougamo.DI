@@ -14,7 +14,7 @@ namespace WebApiHost
 {
     public class AutofacMain : BaseMain
     {
-        protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool nestableScope)
+        protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool disableNestableScope)
         {
             ContainerHolderAccessor.SetRootNull();
             ContextExtensions.SetAutofac();
@@ -67,9 +67,9 @@ namespace WebApiHost
                 builder.RegisterInstance(serviceHolder).SingleInstance();
                 builder.RegisterType<AutofacScopeProvider>().As<IScopeProvider>().InstancePerDependency();
 
-                if (nestableScope)
+                if (disableNestableScope)
                 {
-                    builder.RegisterAutofacNestableHttpContextScopeAccessor();
+                    builder.RegisterAutofacHttpContextScopeAccessor();
                 }
                 if (enableRougamo)
                 {
@@ -77,7 +77,7 @@ namespace WebApiHost
                 }
                 else
                 {
-                    builder.RegisterAutofacHttpContextScopeAccessor();
+                    builder.RegisterAutofacNestableHttpContextScopeAccessor();
                 }
             }
 

@@ -19,34 +19,6 @@ namespace Rougamo.DITests
 
             var response = await SendTestRequestAsync(hostHolder.Address);
 
-            Assert.Contains(nameof(InvalidOperationException), response);
-
-            Assert.NotNull(serviceHolder.OuterService[0]);
-            Assert.Null(serviceHolder.OuterService[1]);
-            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.OuterService[1]);
-
-            Assert.Null(serviceHolder.Inner1Service[0]);
-            Assert.Equal(serviceHolder.Inner1Service[0], serviceHolder.Inner1Service[1]);
-
-            Assert.Null(serviceHolder.Inner2Service[0]);
-            Assert.Equal(serviceHolder.Inner2Service[0], serviceHolder.Inner2Service[1]);
-
-            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner1Service[0]);
-            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner2Service[0]);
-
-            await hostHolder.StopAsync();
-            await hostHolder.DisposeAsync();
-        }
-
-        [Fact]
-        public async Task NestableScopeTest()
-        {
-            var serviceHolder = new ServiceHolder();
-            var main = new TMain();
-            var hostHolder = main.ExecuteNestableScope(serviceHolder);
-
-            var response = await SendTestRequestAsync(hostHolder.Address);
-
             Assert.DoesNotContain(nameof(InvalidOperationException), response);
 
             Assert.NotNull(serviceHolder.OuterService[0]);
@@ -64,6 +36,34 @@ namespace Rougamo.DITests
             Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner1Service[0]);
             Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner2Service[0]);
             Assert.Equal(serviceHolder.OuterService[0], serviceHolder.ParallelService[0]);
+
+            await hostHolder.StopAsync();
+            await hostHolder.DisposeAsync();
+        }
+
+        [Fact]
+        public async Task DisableNestableScopeTest()
+        {
+            var serviceHolder = new ServiceHolder();
+            var main = new TMain();
+            var hostHolder = main.ExecuteDisableNestableScope(serviceHolder);
+
+            var response = await SendTestRequestAsync(hostHolder.Address);
+
+            Assert.Contains(nameof(InvalidOperationException), response);
+
+            Assert.NotNull(serviceHolder.OuterService[0]);
+            Assert.Null(serviceHolder.OuterService[1]);
+            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.OuterService[1]);
+
+            Assert.Null(serviceHolder.Inner1Service[0]);
+            Assert.Equal(serviceHolder.Inner1Service[0], serviceHolder.Inner1Service[1]);
+
+            Assert.Null(serviceHolder.Inner2Service[0]);
+            Assert.Equal(serviceHolder.Inner2Service[0], serviceHolder.Inner2Service[1]);
+
+            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner1Service[0]);
+            Assert.NotEqual(serviceHolder.OuterService[0], serviceHolder.Inner2Service[0]);
 
             await hostHolder.StopAsync();
             await hostHolder.DisposeAsync();
