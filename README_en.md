@@ -55,31 +55,6 @@ public class TestAttribute : MoAttribute
 }
 ```
 
-### Non-HttpContext Scope
-
-By default, the extension method `GetServiceProvider` on `MethodContext` only attempts to retrieve the `IServiceProvider` for the current `HttpContext` scope. If there is no `HttpContext`, it will return the root `IServiceProvider`. This design assumes that in AspNetCore projects, scopes are typically not manually created. If you have a scenario where you need to manually create a scope, follow the steps below:
-
-```csharp
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    // ... other setup steps
-    builder.Services.AddNestableHttpContextScopeAccessor();  // Additional registration step
-    builder.Services.AddRougamoAspNetCore();
-    // ... other setup steps
-}
-
-public class Cls(IServiceProvider services)
-{
-    public void M()
-    {
-        // Use the extension method CreateResolvableScope to create a scope.
-        // If you use CreateScope, that scope will not be accessible in aspect types.
-        using var scope = services.CreateResolvableScope();
-    }
-}
-```
-
 ## Rougamo.Extensions.DependencyInjection.GenericHost
 
 ```csharp
@@ -136,37 +111,6 @@ public class TestAttribute : MoAttribute
 
         // Utilize ILifetimeScope
         var xxx = scope.Resolve<IXxx>();
-    }
-}
-```
-
-### Non-HttpContext Scope
-
-By default, the `GetAutofacCurrentScope` extension method on `MethodContext` only attempts to retrieve the `ILifetimeScope` for the current `HttpContext`. If there is no `HttpContext`, it will return the root `IServiceProvider`. This design assumes that in AspNetCore projects, scopes are typically not manually created. If you have a scenario where you need to manually create a scope, follow the steps below:
-
-```csharp
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    builder.Host
-            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(builder =>
-            {
-                builder.RegisterAutofacNestableHttpContextScopeAccessor(); // Additional registration step
-                builder.RegisterRougamoAspNetCore();
-            });
-    
-    // Registering IHttpContextAccessor is also required
-    builder.Services.AddHttpContextAccessor();
-}
-
-public class Cls(IServiceProvider services)
-{
-    public void M()
-    {
-        // Use the extension method BeginResolvableLifetimeScope to create a scope.
-        // If you use BeginLifetimeScope, that scope will not be accessible in aspect types.
-        using var scope = services.BeginResolvableLifetimeScope();
     }
 }
 ```
