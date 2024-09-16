@@ -1,31 +1,36 @@
-﻿using Microsoft.Extensions.Hosting;
-using RougamoDefLib;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using System.Linq;
+using Microsoft.Extensions.Hosting;
 using Rougamo.Context;
+using RougamoDefLib;
+using Microsoft.AspNetCore.Hosting;
+using System.Linq;
 
 namespace WebApiHost
 {
-    public class Main : BaseMain
+    public class PinnedMain : BaseMain
     {
         protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped, bool disableNestableScope)
         {
-            ServiceProviderHolderAccessor.SetRootNull();
-            ContextExtensions.SetMicrosoft();
+            PinnedScopeAccessor.SetRootNull();
+            ContextExtensions.SetPinned();
 
             IHost host;
 #if NET6_0_OR_GREATER
             var builder = WebApplication.CreateBuilder();
             builder.WebHost.UseUrls("http://127.0.0.1:0");
 
+            if (enableRougamo)
+            {
+                builder.Host.UsePinnedScopeServiceProvider();
+            }
+
             ConfigureServices(builder.Services);
 
             var app = builder.Build();
-            
+
             Configure(app);
 
             host = app;
@@ -39,6 +44,7 @@ namespace WebApiHost
                             .Configure(Configure)
                             .UseUrls("http://127.0.0.1:0");
                     })
+                    .If(enableRougamo, builder => builder.UsePinnedScopeServiceProvider())
                     .Build();
 #endif
 
@@ -54,22 +60,10 @@ namespace WebApiHost
 
                 var descriptor = new ServiceDescriptor(typeof(ITestService), typeof(TestService), scoped ? ServiceLifetime.Scoped : ServiceLifetime.Transient);
 
-                services.AddTransient<IScopeProvider, MicrosoftScopeProvider>();
+                services.AddTransient<IScopeProvider, PinnedScopeProvider>();
+                services.AddHttpContextAccessor();
                 services.AddSingleton(serviceHolder);
                 services.Add(descriptor);
-
-                if (disableNestableScope)
-                {
-                    services.AddHttpContextScopeAccessor();
-                }
-                if (enableRougamo)
-                {
-                    services.AddRougamoAspNetCore();
-                }
-                else
-                {
-                    services.AddNestableHttpContextScopeAccessor();
-                }
             }
 
             void Configure(IApplicationBuilder app)

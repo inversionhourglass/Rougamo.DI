@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Rougamo.Extensions.DependencyInjection;
+﻿using DependencyInjection.StaticAccessor;
 using System;
 
 namespace Rougamo.Context
 {
     /// <summary>
     /// </summary>
-    public static class MethodContextExtensions
+    public static class MethodContextPinnedExtensions
     {
         /// <summary>
         /// Get the root <see cref="IServiceProvider"/>
         /// </summary>
         public static IServiceProvider? GetRootServiceProvider(this MethodContext context)
         {
-            return ServiceProviderHolder.Root;
+            return PinnedScope.RootServices;
         }
 
         /// <summary>
@@ -21,12 +20,7 @@ namespace Rougamo.Context
         /// </summary>
         public static IServiceProvider? GetServiceProvider(this MethodContext context)
         {
-            var provider = ServiceProviderHolder.Root;
-            if (provider == null) return null;
-
-            var accessor = provider.GetService<IServiceScopeAccessor>();
-
-            return accessor?.Scope?.ServiceProvider ?? provider;
+            return PinnedScope.ScopedServices;
         }
     }
 }
