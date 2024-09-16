@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
-    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="3.0.0-priview-1726446741" />
+    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="6.0.0-priview-1726446741" />
   </ItemGroup>
 
   <ItemGroup>
