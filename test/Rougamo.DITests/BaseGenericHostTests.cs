@@ -9,7 +9,7 @@ namespace Rougamo.DITests
     public abstract class BaseGenericHostTests<TMain> where TMain : BaseMain, new()
     {
         [Fact]
-        public async Task NormalTest()
+        public virtual async Task NormalTest()
         {
             var serviceHolder = new ServiceHolder();
             var main = new TMain();
@@ -36,7 +36,7 @@ namespace Rougamo.DITests
         }
 
         [Fact]
-        public async Task WithoutRougamoTest()
+        public virtual async Task WithoutRougamoTest()
         {
             var serviceHolder = new ServiceHolder();
             var main = new TMain();
@@ -59,7 +59,7 @@ namespace Rougamo.DITests
         }
 
         [Fact]
-        public async Task TransientTest()
+        public virtual async Task TransientTest()
         {
             var serviceHolder = new ServiceHolder();
             var main = new TMain();
