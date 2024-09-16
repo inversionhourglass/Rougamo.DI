@@ -3,7 +3,7 @@ using GenericHost;
 
 namespace Rougamo.DITests
 {
-    public class GenericHostTests : BaseGenericHostTests<Main>
+    public class PinnedTests : BaseGenericHostTests<PinnedMain>
     {
     }
 }

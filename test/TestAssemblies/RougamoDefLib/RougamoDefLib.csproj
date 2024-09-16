@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.Autofac\Rougamo.Extensions.DependencyInjection.Autofac.csproj" />
-    <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj" />
+    <ProjectReference Include="..\..\..\src\Rougamo.Extensions.DependencyInjection.Microsoft\Rougamo.Extensions.DependencyInjection.Microsoft.csproj" />
   </ItemGroup>
 
 </Project>

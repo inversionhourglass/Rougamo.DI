@@ -5,12 +5,12 @@ using RougamoDefLib;
 
 namespace GenericHost
 {
-    public class Main : BaseMain
+    public class PinnedMain : BaseMain
     {
         protected override HostHolder Execute(ServiceHolder serviceHolder, bool enableRougamo, bool scoped)
         {
-            ServiceProviderHolderAccessor.SetRootNull();
-            ContextExtensions.SetMicrosoft();
+            PinnedScopeAccessor.SetRootNull();
+            ContextExtensions.SetPinned();
 
             var locker = new Locker();
             var builder = Host.CreateDefaultBuilder();
@@ -22,18 +22,14 @@ namespace GenericHost
                 services.AddSingleton(locker);
                 services.AddSingleton(serviceHolder);
                 services.Add(descriptor);
-                services.AddTransient<IScopeProvider, MicrosoftScopeProvider>();
+                services.AddTransient<IScopeProvider, PinnedScopeProvider>();
                 services.AddHostedService<TestHostedService>();
-
-                if (enableRougamo)
-                {
-                    services.AddRougamoGenericHost();
-                }
-                else
-                {
-                    services.AddServiceScopeAccessor();
-                }
             });
+
+            if (enableRougamo)
+            {
+                builder.UsePinnedScopeServiceProvider();
+            }
 
             var host = builder.Build();
 
