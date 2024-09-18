@@ -78,9 +78,8 @@ jobs:
         run: |
           $tagName = "${{ github.ref_name }}"
           if ($tagName -like "microsoft-*") {
-            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+\.nupkg" }
-            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+\.nupkg" }
-            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
+            $microsoft = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Microsoft\.\d+\.\d+\.\d+\.nupkg" }
+            $nupkgs = @($microsoft.FullName)
           } elseif ($tagName -like "autofac-*") {
             $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+\.nupkg" }
             $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+\.nupkg" }

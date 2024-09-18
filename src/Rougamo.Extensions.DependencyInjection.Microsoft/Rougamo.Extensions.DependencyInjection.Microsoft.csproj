@@ -4,7 +4,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <PackageTags>Rougamo IoC DI</PackageTags>
-    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionPrefix>7.0.0</VersionPrefix>
 	<Description>Provide extension methods to access Microsoft DepenencyInjection in Rougamo aspect classes.</Description>
   </PropertyGroup>
 
