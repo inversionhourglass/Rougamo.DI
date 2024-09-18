@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{90A46C2A-2253-44D9-A8AE-94428744C324}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.GenericHost", "src\Rougamo.Extensions.DependencyInjection.GenericHost\Rougamo.Extensions.DependencyInjection.GenericHost.csproj", "{BA484F53-886B-4FA9-B74B-8AE25B5C6449}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{E1FFFA22-F1C2-47C2-83B0-80244D6AFB08}"
 	ProjectSection(SolutionItems) = preProject
 		CHANGELOG.md = CHANGELOG.md
@@ -15,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		README_en.md = README_en.md
 		rougamo-di.png = rougamo-di.png
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.AspNetCore\Rougamo.Extensions.DependencyInjection.AspNetCore.csproj", "{3FE01878-0B9D-41D2-89AE-68A3599368D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B1F075EE-2CB7-4FA6-9BF1-0D106104C5ED}"
 EndProject
@@ -34,9 +30,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.Dependen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Abstractions", "src\Rougamo.Extensions.DependencyInjection.Abstractions\Rougamo.Extensions.DependencyInjection.Abstractions.csproj", "{AA57FD23-E2E2-4C51-8FBE-35EC45C03965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore.csproj", "{37E31432-4157-4F04-98DF-E569CBFB726E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore", "src\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore\Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore.csproj", "{37E31432-4157-4F04-98DF-E569CBFB726E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions", "src\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions.csproj", "{7045D528-5AAE-4200-9FF1-EEA2379DAD33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions", "src\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions\Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions.csproj", "{7045D528-5AAE-4200-9FF1-EEA2379DAD33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Microsoft", "src\Rougamo.Extensions.DependencyInjection.Microsoft\Rougamo.Extensions.DependencyInjection.Microsoft.csproj", "{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,14 +42,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BA484F53-886B-4FA9-B74B-8AE25B5C6449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA484F53-886B-4FA9-B74B-8AE25B5C6449}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA484F53-886B-4FA9-B74B-8AE25B5C6449}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA484F53-886B-4FA9-B74B-8AE25B5C6449}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FE01878-0B9D-41D2-89AE-68A3599368D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FE01878-0B9D-41D2-89AE-68A3599368D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FE01878-0B9D-41D2-89AE-68A3599368D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FE01878-0B9D-41D2-89AE-68A3599368D7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D09EE633-784D-41A1-833F-03AD0DCE2E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D09EE633-784D-41A1-833F-03AD0DCE2E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D09EE633-784D-41A1-833F-03AD0DCE2E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,13 +74,15 @@ Global
 		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7045D528-5AAE-4200-9FF1-EEA2379DAD33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BA484F53-886B-4FA9-B74B-8AE25B5C6449} = {90A46C2A-2253-44D9-A8AE-94428744C324}
-		{3FE01878-0B9D-41D2-89AE-68A3599368D7} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{D09EE633-784D-41A1-833F-03AD0DCE2E4C} = {B1F075EE-2CB7-4FA6-9BF1-0D106104C5ED}
 		{6A069E23-FBE6-4390-9D7D-D9041D72541D} = {B1F075EE-2CB7-4FA6-9BF1-0D106104C5ED}
 		{3D742E30-3D30-476B-A724-C6EA89C3CDA5} = {6A069E23-FBE6-4390-9D7D-D9041D72541D}
@@ -100,6 +92,7 @@ Global
 		{AA57FD23-E2E2-4C51-8FBE-35EC45C03965} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{37E31432-4157-4F04-98DF-E569CBFB726E} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{7045D528-5AAE-4200-9FF1-EEA2379DAD33} = {90A46C2A-2253-44D9-A8AE-94428744C324}
+		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E83BB482-D1DC-47D6-960A-328497C04AEC}

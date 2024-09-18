@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net48;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net461;net48;netcoreapp3.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
 	<LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -10,7 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	<PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="6.0.0-preview-1726646692" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
