@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
-    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="6.0.0-preview-1726646692" />
+    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
   </ItemGroup>
 
