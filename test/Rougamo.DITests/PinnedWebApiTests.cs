@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP3_1_OR_GREATER
+﻿#if NETCOREAPP3_1
 using System.Threading.Tasks;
 using WebApiHost;
 using Xunit;
