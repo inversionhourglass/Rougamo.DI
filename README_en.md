@@ -8,8 +8,7 @@
 
 | Package Name                                                                                                        | Description                                                                                                               |
 |:-------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------|
-| [Rougamo.Extensions.DependencyInjection.AspNetCore](#rougamoextensionsdependencyinjectionaspnetcore)                | Uses the official `DependencyInjection` and integrates with `HttpContext` to return the correct scoped `IServiceProvider` |
-| [Rougamo.Extensions.DependencyInjection.GenericHost](#rougamoextensionsdependencyinjectiongenerichost)              | Uses the official `DependencyInjection`, suitable for non-AspNetCore Generic Host projects                                |
+| [Rougamo.Extensions.DependencyInjection.Microsoft](#rougamoextensionsdependencyinjectionmicrosoft)                  | Uses the official `DependencyInjection` and integrates with `HttpContext` to return the correct scoped `IServiceProvider` |
 | [Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore](#rougamoextensionsdependencyinjectionautofacaspnetcore) | Uses `Autofac` and integrates with `HttpContext` to return the correct scoped `ILifetimeScope`                            |
 | [Rougamo.Extensions.DependencyInjection.Autofac](#rougamoextensionsdependencyinjectionautofac)                      | Uses `Autofac`, suitable for non-AspNetCore projects                                                                      |
 | Rougamo.Extensions.DependencyInjection.Abstractions                                                                 | The base abstraction package for all other packages                                                                       |
@@ -23,62 +22,43 @@
     - `Rougamo.Extensions.DependencyInjection.Abstractions`
     - `Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions`
 2. For Microsoft official DI extension packages, the major version matches the corresponding official package (e.g., `Microsoft.Extensions.*`):
-    - `Rougamo.Extensions.DependencyInjection.AspNetCore`
-    - `Rougamo.Extensions.DependencyInjection.GenericHost`
+    - `Rougamo.Extensions.DependencyInjection.Microsoft`
 3. For Autofac extension packages, the major version matches the corresponding official `Autofac` package:
     - `Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore`
     - `Rougamo.Extensions.DependencyInjection.Autofac`
 
-## Rougamo.Extensions.DependencyInjection.AspNetCore
+## Rougamo.Extensions.DependencyInjection.Microsoft
 
 ### Quick Start
 
-```csharp
-// Register Rougamo (Note: Rougamo does not require registration if you do not need IoC/DI features)
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    // ... other setup steps
-    builder.Services.AddRougamoAspNetCore();
-    // ... other setup steps
-}
+**`Rougamo.Extensions.DependencyInjection.Microsoft` depends on `DependencyInjection.StaticAccessor`. The initialization of the startup project is completed via `DependencyInjection.StaticAccessor`. For different types of project initialization, please refer to [`DependencyInjection.StaticAccessor`](https://github.com/inversionhourglass/DependencyInjection.StaticAccessor).**
 
-// Accessing IServiceProvider in an aspect
-public class TestAttribute : MoAttribute
-{
-    public override void OnEntry(MethodContext context)
-    {
-        // Use the extension method GetServiceProvider to obtain the IServiceProvider instance
-        var services = context.GetServiceProvider();
+For the startup project, reference `DependencyInjection.StaticAccessor.Hosting`:
+> dotnet add package DependencyInjection.StaticAccessor.Hosting
 
-        // Utilize IServiceProvider
-        var xxx = services.GetService<IXxx>();
-    }
-}
-```
-
-## Rougamo.Extensions.DependencyInjection.GenericHost
+For non-startup projects, reference `Rougamo.Extensions.DependencyInjection.Microsoft`:
+> dotnet add package Rougamo.Extensions.DependencyInjection.Microsoft
 
 ```csharp
-// Register Rougamo (Note: Rougamo does not require registration if you do not need IoC/DI features)
+// Register Rougamo (Note: If you're not using IoC/DI functionality, Rougamo does not require registration by default)
 public static void Main(string[] args)
 {
+    // 1. Initialization. This example uses a generic host; for other project types, please refer to the readme of the DependencyInjection.StaticAccessor project.
     var builder = Host.CreateDefaultBuilder();
-    // ... other setup steps
-    builder.ConfigureServices(services => services.AddRougamoGenericHost());
-    // ... other setup steps
+
+    builder.UsePinnedScopeServiceProvider(); // Initialization completed with this single step
+
+    var host = builder.Build();
+
+    host.Run();
 }
 
-// Accessing IServiceProvider in an aspect
+// Retrieve and use an IServiceProvider instance in an aspect type
 public class TestAttribute : MoAttribute
 {
     public override void OnEntry(MethodContext context)
     {
-        // Use the extension method GetServiceProvider to obtain the IServiceProvider instance
-        var services = context.GetServiceProvider();
-
-        // Utilize IServiceProvider
-        var xxx = services.GetService<IXxx>();
+        var xxx = context.GetService<IXxx>();
     }
 }
 ```
