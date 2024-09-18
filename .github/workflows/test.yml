@@ -65,3 +65,6 @@ jobs:
         
       - name: Test in RELEASE with net7.0
         run: dotnet test --configuration Release --no-build --framework net7.0 ${{ env.SOLUTION }}
+        
+      - name: Test in RELEASE with net8.0
+        run: dotnet test --configuration Release --no-build --framework net8.0 ${{ env.SOLUTION }}
