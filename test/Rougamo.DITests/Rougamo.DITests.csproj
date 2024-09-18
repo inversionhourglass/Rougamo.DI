@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net48;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net461;net48;netcoreapp3.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
@@ -27,15 +27,15 @@
     <ProjectReference Include="..\TestAssemblies\GenericHost\GenericHost.csproj" />
     <ProjectReference Include="..\TestAssemblies\WebApiHost\WebApiHost.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <ProjectReference Include="..\TestAssemblies\GenericHost\GenericHost.csproj" />
-    <ProjectReference Include="..\TestAssemblies\WebApiHost\WebApiHost.csproj" />
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <ProjectReference Include="..\TestAssemblies\GenericHost\GenericHost.csproj" />
     <ProjectReference Include="..\TestAssemblies\WebApiHost\WebApiHost.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <ProjectReference Include="..\TestAssemblies\GenericHost\GenericHost.csproj" />
+    <ProjectReference Include="..\TestAssemblies\WebApiHost\WebApiHost.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <ProjectReference Include="..\TestAssemblies\GenericHost\GenericHost.csproj" />
     <ProjectReference Include="..\TestAssemblies\WebApiHost\WebApiHost.csproj" />
   </ItemGroup>
