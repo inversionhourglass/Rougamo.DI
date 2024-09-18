@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
 	<LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="7.0.0-preview-1726646818" />
+    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="8.0.0-preview-1726647274" />
   </ItemGroup>
 
   <ItemGroup>

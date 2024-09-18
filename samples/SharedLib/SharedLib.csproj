@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Condition="'$(FromNuGet)' == 'true'" Include="Rougamo.Extensions.DependencyInjection.Microsoft" Version="7.0.0-preview-1726686520" />
+    <PackageReference Condition="'$(FromNuGet)' == 'true'" Include="Rougamo.Extensions.DependencyInjection.Microsoft" Version="8.0.0-preview-1726686900" />
     <PackageReference Include="Rougamo.Fody" Version="4.0.3" PrivateAssets="contentfiles;analyzers" />
   </ItemGroup>
 
