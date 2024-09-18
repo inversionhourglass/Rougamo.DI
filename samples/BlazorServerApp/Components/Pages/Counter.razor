@@ -1,0 +1,32 @@
+﻿@page "/counter"
+@using SharedLib
+@rendermode InteractiveServer
+@inherits DependencyInjection.StaticAccessor.Blazor.PinnedScopeOwningComponentBase
+@inject TestService testService
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    [Getter]
+    private TestService GetTestService() => throw new NotImplementedException();
+
+    private void IncrementCount()
+    {
+        if (testService == GetTestService())
+        {
+            currentCount++;
+        }
+        else if (GetTestService() == ScopedServices.GetService<TestService>())
+        {
+            currentCount--;
+        }
+    }
+}
