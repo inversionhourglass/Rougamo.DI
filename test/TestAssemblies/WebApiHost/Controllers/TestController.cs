@@ -10,12 +10,11 @@ namespace WebApiHost.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TestController(IScopeProvider provider, ServiceHolder serviceHolder, IHttpContextAccessor accesor) : ControllerBase
+    public class TestController(IScopeProvider provider, ServiceHolder serviceHolder) : ControllerBase
     {
         [HttpGet]
         public async Task<string> Get()
         {
-            var httpContext = accesor.HttpContext;
             Outer1(serviceHolder);
 
             using (var innerScope1 = provider.CreateScope())
