@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="7.0.0-preview-1726646818" />
+    <PackageReference Include="DependencyInjection.StaticAccessor.Hosting" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

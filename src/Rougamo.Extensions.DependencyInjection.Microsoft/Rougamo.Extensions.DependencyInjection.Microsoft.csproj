@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyInjection.StaticAccessor" Version="7.0.0-preview-1726646818" />
+    <PackageReference Include="DependencyInjection.StaticAccessor" Version="7.0.0" />
     <PackageReference Include="Rougamo.Fody" Version="1.0.1" ExcludeAssets="Build" />
   </ItemGroup>
 
