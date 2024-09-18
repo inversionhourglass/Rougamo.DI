@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
 	<LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" /> <!--别改这个版本，改了之后跑一下测试-->
     <PackageReference Include="Rougamo.Fody" Version="4.0.0" PrivateAssets="contentfiles;analyzers" />
   </ItemGroup>
 
