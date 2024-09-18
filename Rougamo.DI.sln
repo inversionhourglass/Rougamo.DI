@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiApp", "samples\WebApi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLib", "samples\SharedLib\SharedLib.csproj", "{501CF716-B489-493F-9003-312C585C7403}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "samples\ConsoleApp\ConsoleApp.csproj", "{02298CD0-D502-49A6-B467-15C58D09D556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{501CF716-B489-493F-9003-312C585C7403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{501CF716-B489-493F-9003-312C585C7403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{501CF716-B489-493F-9003-312C585C7403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02298CD0-D502-49A6-B467-15C58D09D556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02298CD0-D502-49A6-B467-15C58D09D556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02298CD0-D502-49A6-B467-15C58D09D556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02298CD0-D502-49A6-B467-15C58D09D556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{8455D773-764D-4B3B-A024-DE817E23AF1D} = {211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}
 		{501CF716-B489-493F-9003-312C585C7403} = {211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}
+		{02298CD0-D502-49A6-B467-15C58D09D556} = {211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E83BB482-D1DC-47D6-960A-328497C04AEC}
