@@ -5,6 +5,7 @@
     <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <PackageTags>Rougamo IoC DI Autofac AspNetCore</PackageTags>
     <VersionPrefix>4.0.1</VersionPrefix>
+	<Description>Provide extension methods to access Autofac in Rougamo aspect classes for AspNetCore projects.</Description>
   </PropertyGroup>
 
   <ItemGroup>

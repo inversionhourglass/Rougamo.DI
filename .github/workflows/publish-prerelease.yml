@@ -93,18 +93,19 @@ jobs:
           }
 
           if ($branchName -like "pre/microsoft*") {
-            $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.GenericHost\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
-            $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $microsoft = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Microsoft\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $nupkgs = @($microsoft.FullName)
           } elseif ($branchName -like "pre/autofac*") {
             $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
             $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Autofac\.AspNetCore\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } elseif ($branchName -eq "pre/abstract") {
             $genericHost = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
             $aspnetcore = Get-ChildItem -Path nugets | Where-Object { $_.Name -match "Rougamo\.Extensions\.DependencyInjection\.AspNetCore\.Abstractions\.\d+\.\d+\.\d+-preview-\d+\.nupkg" }
+            $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           } else {
             throw "Unknown branch [$branchName]."
           }
-          $nupkgs = @($genericHost.FullName, $aspnetcore.FullName)
           foreach ($nupkg in $nupkgs) {
             dotnet nuget push $nupkg -k ${{ secrets.API_KEY }} -s https://api.nuget.org/v3/index.json
           }
