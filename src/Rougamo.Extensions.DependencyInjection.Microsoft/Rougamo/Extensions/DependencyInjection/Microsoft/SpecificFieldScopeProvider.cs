@@ -37,7 +37,7 @@ namespace Rougamo.Extensions.DependencyInjection.Microsoft
             (var declaringType, var fieldName) = key;
 
             var fieldInfo = declaringType.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (fieldInfo == null) return Default;
+            if (fieldInfo == null || !typeof(T).IsAssignableFrom(fieldInfo.FieldType)) return Default;
 
             var pObjThis = Expression.Parameter(typeof(object), "@this");
             var convert = Expression.Convert(pObjThis, declaringType);
