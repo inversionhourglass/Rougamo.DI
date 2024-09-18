@@ -36,6 +36,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.Dependen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rougamo.Extensions.DependencyInjection.Microsoft", "src\Rougamo.Extensions.DependencyInjection.Microsoft\Rougamo.Extensions.DependencyInjection.Microsoft.csproj", "{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiApp", "samples\WebApiApp\WebApiApp.csproj", "{8455D773-764D-4B3B-A024-DE817E23AF1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLib", "samples\SharedLib\SharedLib.csproj", "{501CF716-B489-493F-9003-312C585C7403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +84,14 @@ Global
 		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8455D773-764D-4B3B-A024-DE817E23AF1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8455D773-764D-4B3B-A024-DE817E23AF1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8455D773-764D-4B3B-A024-DE817E23AF1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8455D773-764D-4B3B-A024-DE817E23AF1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{501CF716-B489-493F-9003-312C585C7403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{501CF716-B489-493F-9003-312C585C7403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{501CF716-B489-493F-9003-312C585C7403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{501CF716-B489-493F-9003-312C585C7403}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +107,8 @@ Global
 		{37E31432-4157-4F04-98DF-E569CBFB726E} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{7045D528-5AAE-4200-9FF1-EEA2379DAD33} = {90A46C2A-2253-44D9-A8AE-94428744C324}
 		{CE76E9C7-4CAD-4304-BEF0-64EDC5666EDE} = {90A46C2A-2253-44D9-A8AE-94428744C324}
+		{8455D773-764D-4B3B-A024-DE817E23AF1D} = {211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}
+		{501CF716-B489-493F-9003-312C585C7403} = {211C63BD-525F-4A10-9EE2-4B0A6BD86DBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E83BB482-D1DC-47D6-960A-328497C04AEC}
