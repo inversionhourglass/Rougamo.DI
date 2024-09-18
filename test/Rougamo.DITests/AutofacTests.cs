@@ -1,5 +1,4 @@
-﻿#if !NET5_0
-using GenericHost;
+﻿using GenericHost;
 
 namespace Rougamo.DITests
 {
@@ -7,4 +6,3 @@ namespace Rougamo.DITests
     {
     }
 }
-#endif
