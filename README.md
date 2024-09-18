@@ -8,12 +8,11 @@
 
 |                                                  包名                                                               |                                          用途                                         |
 |:-------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------|
-| [Rougamo.Extensions.DependencyInjection.AspNetCore](#rougamoextensionsdependencyinjectionaspnetcore)                | 使用官方`DependencyInjection`，结合当前`HttpContext`，返回正确scope的`IServiceProvider` |
-| [Rougamo.Extensions.DependencyInjection.GenericHost](#rougamoextensionsdependencyinjectiongenerichost)              | 使用官方`DependencyInjection`，适用于非AspNetCore的Generic Host项目                     |
+| [Rougamo.Extensions.DependencyInjection.Microsoft](#rougamoextensionsdependencyinjectionmicrosoft)                  | 使用官方`DependencyInjection`，结合当前`HttpContext`，返回正确scope的`IServiceProvider` |
 | [Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore](#rougamoextensionsdependencyinjectionautofacaspnetcore) | 使用`Autofac`，结合当前`HttpContext`，返回正确scope的`ILifetimeScope`                   |
 | [Rougamo.Extensions.DependencyInjection.Autofac](#rougamoextensionsdependencyinjectionautofac)                      | 使用`Autofac`，适用于非AspNetCore项目                                                  |
-| Rougamo.Extensions.DependencyInjection.Abstractions                                                                 | 所有其他包的基础抽象包                                                                  |
-| Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions                                                      | 所有AspNetCore相关包的基础抽象包                                                        |
+| Rougamo.Extensions.DependencyInjection.Abstractions                                                                 | 基础抽象包                                                                  |
+| Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions                                                      | AspNetCore基础抽象包                                                        |
 
 ## 版本号说明
 
@@ -23,50 +22,35 @@
     - `Rougamo.Extensions.DependencyInjection.Abstractions`
     - `Rougamo.Extensions.DependencyInjection.AspNetCore.Abstractions`
 2. 微软官方DI扩展包，主版本号与官方包（`Microsoft.Extensions.*`）相同
-    - `Rougamo.Extensions.DependencyInjection.AspNetCore`
-    - `Rougamo.Extensions.DependencyInjection.GenericHost`
+    - `Rougamo.Extensions.DependencyInjection.Microsoft`
 3. Autofac扩展包，主版本号与官方包（`Autofac`）相同
     - `Rougamo.Extensions.DependencyInjection.Autofac.AspNetCore`
     - `Rougamo.Extensions.DependencyInjection.Autofac`
 
-## Rougamo.Extensions.DependencyInjection.AspNetCore
+## Rougamo.Extensions.DependencyInjection.Microsoft
 
 ### 快速开始
 
-```csharp
-// 注册Rougamo（注：如果你不使用IoC/DI功能，Rougamo默认是不需要注册操作的）
-public static void Main(string[] args)
-{
-    var builder = WebApplication.CreateBuilder(args);
-    // ...省略其他步骤
-    builder.Services.AddRougamoAspNetCore();
-    // ...省略其他步骤
-}
+**`Rougamo.Extensions.DependencyInjection.Microsoft`依赖于`DependencyInjection.StaticAccessor`，启动项目初始化部分通过`DependencyInjection.StaticAccessor`完成，不同类型项目的初始化方式请跳转[`DependencyInjection.StaticAccessor`](https://github.com/inversionhourglass/DependencyInjection.StaticAccessor)查看**
 
-// 在切面类型中获取IServiceProvider实例并使用
-public class TestAttribute : MoAttribute
-{
-    public override void OnEntry(MethodContext context)
-    {
-        // 使用扩展方法GetServiceProvider获取IServiceProvider实例
-        var services = context.GetServiceProvider();
+启动项目引用`DependencyInjection.StaticAccessor.Hosting`
+> dotnet add package DependencyInjection.StaticAccessor.Hosting
 
-        // 使用IServiceProvider
-        var xxx = services.GetService<IXxx>();
-    }
-}
-```
-
-## Rougamo.Extensions.DependencyInjection.GenericHost
+非启动项目引用`Rougamo.Extensions.DependencyInjection.Microsoft`
+> dotnet add package Rougamo.Extensions.DependencyInjection.Microsoft
 
 ```csharp
 // 注册Rougamo（注：如果你不使用IoC/DI功能，Rougamo默认是不需要注册操作的）
 public static void Main(string[] args)
 {
+    // 1. 初始化。这里用通用主机进行演示，其他类型项目请查看DependencyInjection.StaticAccessor项目的readme
     var builder = Host.CreateDefaultBuilder();
-    // ...省略其他步骤
-    builder.ConfigureServices(services => services.AddRougamoGenericHost());
-    // ...省略其他步骤
+
+    builder.UsePinnedScopeServiceProvider(); // 仅此一步完成初始化
+
+    var host = builder.Build();
+
+    host.Run();
 }
 
 // 在切面类型中获取IServiceProvider实例并使用
@@ -74,11 +58,7 @@ public class TestAttribute : MoAttribute
 {
     public override void OnEntry(MethodContext context)
     {
-        // 使用扩展方法GetServiceProvider获取IServiceProvider实例
-        var services = context.GetServiceProvider();
-
-        // 使用IServiceProvider
-        var xxx = services.GetService<IXxx>();
+        var xxx = context.GetService<IXxx>();
     }
 }
 ```
