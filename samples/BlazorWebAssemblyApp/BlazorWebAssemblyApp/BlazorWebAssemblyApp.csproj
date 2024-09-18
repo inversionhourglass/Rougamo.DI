@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SharedLib\SharedLib.csproj" />
     <ProjectReference Include="..\BlazorWebAssemblyApp.Client\BlazorWebAssemblyApp.Client.csproj" />
-    <PackageReference Include="DependencyInjection.StaticAccessor.Blazor" Version="8.0.0-preview-1726694007" />
+    <PackageReference Include="DependencyInjection.StaticAccessor.Blazor" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.7" />
   </ItemGroup>
 
